@@ -7,7 +7,7 @@ description: "Detect AI-like phrasing, templated rhetoric, and economics-specifi
 
 **Core mission: remove AI traces without destroying journal-quality economics prose.**
 
-When the user provides a file path, read the file first. For word lists, template lists, and density thresholds, read the reference file `academic-deai-reference.md` in the same directory as this file.
+When the user provides a file path, read the file first. For word lists, template lists, and density thresholds, read the reference file `reference.md` in the same directory as this file.
 
 ---
 
@@ -196,7 +196,7 @@ If forced to choose, prefer journal-quality clarity over blunt simplicity.
 
 ## 10. Detection Rules
 
-For detailed word lists, template lists, and density thresholds, refer to `academic-deai-reference.md`.
+For detailed word lists, template lists, and density thresholds, refer to `reference.md`.
 
 ### 10.1 Lexical markers
 Flag high-risk verbs, adjectives, sentence openers, and template sentences listed in the reference file. Apply density thresholds, not mechanical word-matching.
