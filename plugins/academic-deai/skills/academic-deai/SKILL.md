@@ -389,8 +389,11 @@ AI-generated economics prose often uses notation conventions from other fields o
 - When standard-deviation units are necessary, write "standard deviations" in full on first use
 
 **Parenthesis overload:**
-- Flag sentences with two or more parenthetical insertions — this is a common AI pattern that makes prose read like annotated code rather than journal text
-- Economics papers use parentheses sparingly in running text; heavy parenthetical style is a marker of AI or report-style writing
+- Flag sentences with two or more parenthetical insertions. This is a common AI pattern that makes prose read like annotated code rather than journal text.
+- Economics papers use parentheses sparingly in running text. Heavy parenthetical style is a marker of AI or report-style writing.
+- Parentheses in economics prose should be reserved almost exclusively for standard errors after coefficients, e.g. "0.12 (0.03)".
+- Table/figure references, explanatory asides, and qualifications should be woven into the sentence or placed at the end, not inserted as parenthetical interruptions.
+- When revising, actively reduce parentheses. If a sentence has any parenthetical that is not a standard error, consider rewriting to eliminate it.
 
 ---
 
