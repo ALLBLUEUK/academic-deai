@@ -1,0 +1,34 @@
+{
+  "name": "academic-deai",
+  "version": "1.0.0",
+  "description": "Detect AI-like phrasing, templated rhetoric, and economics-specific writing problems in academic manuscripts.",
+  "author": {
+    "name": "ALLBLUEUK",
+    "url": "https://github.com/ALLBLUEUK"
+  },
+  "homepage": "https://github.com/ALLBLUEUK/academic-deai",
+  "repository": "https://github.com/ALLBLUEUK/academic-deai",
+  "license": "MIT",
+  "keywords": [
+    "academic-writing",
+    "economics",
+    "ai-detection",
+    "style-check"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Academic De-AI",
+    "shortDescription": "Detect and fix AI writing patterns in economics papers.",
+    "longDescription": "Detects AI-like phrasing, templated rhetoric, causal overreach, and economics-specific writing problems. Suggests minimal revisions to make manuscripts read like human-written journal prose.",
+    "developerName": "ALLBLUEUK",
+    "category": "Writing",
+    "capabilities": [
+      "Read"
+    ],
+    "websiteURL": "https://github.com/ALLBLUEUK/academic-deai",
+    "defaultPrompt": [
+      "Review this text for AI writing patterns and economics-specific style issues."
+    ],
+    "brandColor": "#1a5276"
+  }
+}

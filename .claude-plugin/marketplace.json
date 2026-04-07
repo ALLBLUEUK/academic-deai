@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "academic-deai",
+  "description": "Detect AI-like phrasing, templated rhetoric, and economics-specific writing problems in academic manuscripts.",
+  "owner": {
+    "name": "ALLBLUEUK",
+    "url": "https://github.com/ALLBLUEUK"
+  },
+  "plugins": [
+    {
+      "name": "academic-deai",
+      "description": "Detect and fix AI writing patterns in economics papers",
+      "source": "./plugins/academic-deai",
+      "category": "writing"
+    }
+  ]
+}

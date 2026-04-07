@@ -1,0 +1,12 @@
+{
+  "name": "academic-deai",
+  "description": "Detect AI-like phrasing, templated rhetoric, and economics-specific writing problems in academic manuscripts.",
+  "version": "1.0.0",
+  "author": {
+    "name": "ALLBLUEUK",
+    "url": "https://github.com/ALLBLUEUK"
+  },
+  "homepage": "https://github.com/ALLBLUEUK/academic-deai",
+  "repository": "https://github.com/ALLBLUEUK/academic-deai",
+  "license": "MIT"
+}
