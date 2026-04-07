@@ -42,7 +42,7 @@ Built for economics papers. Useful for any social-science manuscript.
 
 ### After (score: 0)
 
-> "Trade shocks worsened food insecurity through direct price transmission and by placing greater pressure on households with limited capacity to absorb higher food costs."
+> "Trade shocks worsened food insecurity through higher prices for imported staples and by reducing the purchasing power of low-income households."
 
 </td>
 </tr>
@@ -58,7 +58,7 @@ Built for economics papers. Useful for any social-science manuscript.
 
 ### After (score: 0)
 
-> "The results show that climate variability affects agricultural outcomes unevenly across settings and sectors."
+> "Climate variability affects agricultural outcomes unevenly across food groups: cereals and perishable crops show larger declines than legumes or dairy in our sample of developing economies."
 
 </td>
 </tr>
@@ -74,7 +74,7 @@ Built for economics papers. Useful for any social-science manuscript.
 
 ### After (score: 0)
 
-> "Tariff reductions are associated with higher dietary diversity, consistent with improved access to imported foods."
+> "Tariff reductions are associated with higher dietary diversity, consistent with greater access to imported food varieties in the treated regions."
 
 </td>
 </tr>
