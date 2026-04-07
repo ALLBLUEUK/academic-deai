@@ -33,14 +33,14 @@ Built for economics papers. Useful for any social-science manuscript.
 <tr>
 <td width="50%">
 
-### Before (AI: 3, JQ: 2)
+### Before
 
 > "Moreover, our findings underscore that trade shocks play a pivotal role in exacerbating food insecurity -- not only through direct price transmission channels but also by undermining the resilience of vulnerable households. These results have important implications for policy design."
 
 </td>
 <td width="50%">
 
-### After (AI: 0, JQ: 0)
+### After
 
 > "Trade shocks worsened food insecurity through higher prices for imported staples and by reducing the purchasing power of low-income households."
 
@@ -49,14 +49,14 @@ Built for economics papers. Useful for any social-science manuscript.
 <tr>
 <td>
 
-### Before (AI: 3, JQ: 2)
+### Before
 
 > "This paper contributes to a more nuanced understanding of how climate variability shapes agricultural outcomes. Notably, the heterogeneous effects across food groups illuminate the multifaceted nature of dietary vulnerability in developing economies."
 
 </td>
 <td>
 
-### After (AI: 0, JQ: 0)
+### After
 
 > "Climate variability affects agricultural outcomes unevenly across food groups: cereals and perishable crops show larger declines than legumes or dairy in our sample of developing economies."
 
@@ -65,14 +65,14 @@ Built for economics papers. Useful for any social-science manuscript.
 <tr>
 <td>
 
-### Before (AI: 3, JQ: 2)
+### Before
 
 > "Interestingly, the coefficient on tariff reduction is positive and significant, lending support to the hypothesis that trade liberalization fosters dietary diversity through enhanced market access."
 
 </td>
 <td>
 
-### After (AI: 0, JQ: 0)
+### After
 
 > "Tariff reductions are associated with higher dietary diversity, consistent with greater access to imported food varieties in the treated regions."
 
@@ -150,7 +150,7 @@ The block below is **unedited output** from running `/academic-deai` on the thre
 > "This paper contributes to a more nuanced understanding of how climate variability shapes agricultural outcomes. Notably, the heterogeneous effects across food groups illuminate the multifaceted nature of dietary vulnerability in developing economies."
 
 - Rules triggered: "contributes to a more nuanced understanding" literature template (ai-detection §4), `nuanced` + `multifaceted` very-high-risk adjectives (ai-detection §2), `Notably` opener (ai-detection §3), `illuminate` (ai-detection §1), `shapes` causal overreach (ai-detection §6.1), abstract-noun stacking: `vulnerability` + `nature` + `outcomes` (ai-detection §5.4), proposal-style language (ai-detection §6.5)
-- JQ issues: no food group named, no magnitude, no direction (journal-quality §2.2), contribution not specific — names no method, data, or prior paper (journal-quality §5.2)
+- JQ issues: no food group named, no magnitude, no direction (journal-quality §2.2), contribution not specific �?names no method, data, or prior paper (journal-quality §5.2)
 - Journal-quality revision: "Climate variability affects agricultural outcomes unevenly across food groups: cereals and perishable crops show larger declines than legumes or dairy in our sample of developing economies."
 
 ---
