@@ -5,7 +5,13 @@ description: "Detect AI-like phrasing, templated rhetoric, and economics-specifi
 
 # Academic De-AI for Economics Writing
 
-**Core mission: remove AI traces without destroying journal-quality economics prose.**
+**Core mission: produce journal-quality economics prose free of AI traces.**
+
+Review every sentence along two dimensions:
+1. Does it contain AI-like markers or templated rhetoric?
+2. Does it read like professional economics journal prose?
+
+A sentence can score zero on AI markers and still fail if it is too flat, too note-like, too vague, or too unacademic.
 
 When the user provides a file path, read the file first. For word lists, template lists, and density thresholds, read the reference file `reference.md` in the same directory as this file.
 
@@ -42,7 +48,7 @@ Writing that removes AI markers by stripping away legitimate academic texture, l
 
 ---
 
-## 3. Preserve These Academic Features
+## 4. Preserve These Academic Features
 
 Do not automatically remove the following if they are concrete and disciplined:
 
@@ -63,7 +69,7 @@ Examples of acceptable academic prose:
 
 ---
 
-## 4. "This paper" Rule
+## 5. "This paper" Rule
 
 Do not ban "This paper" outright.
 
@@ -80,7 +86,7 @@ Flag only when:
 
 ---
 
-## 5. Passive Voice Rule
+## 6. Passive Voice Rule
 
 Do not flag passive voice mechanically.
 
@@ -102,7 +108,7 @@ Higher-risk passive examples:
 
 ---
 
-## 6. Rewriting Standard
+## 7. Rewriting Standard
 
 When revising, prefer the smallest revision that removes AI-like phrasing while preserving journal-quality prose.
 
@@ -121,7 +127,7 @@ Do not:
 
 ---
 
-## 7. Avoid Memo-Style Downgrades
+## 8. Avoid Memo-Style Downgrades
 
 Flag a proposed rewrite if it does any of the following:
 - removes the mechanism entirely
@@ -138,7 +144,7 @@ Bad revision pattern:
 
 ---
 
-## 8. Before / After Examples
+## 9. Before / After Examples
 
 ### Example 1
 
@@ -181,7 +187,7 @@ Why: removes Interestingly and lending support; keeps the mechanism; keeps the s
 
 ---
 
-## 9. Tone Calibration
+## 10. Tone Calibration
 
 Target style:
 - like a careful economics author writing for a journal
@@ -194,20 +200,20 @@ If forced to choose, prefer journal-quality clarity over blunt simplicity.
 
 ---
 
-## 10. Detection Rules
+## 11. Detection Rules
 
 For detailed word lists, template lists, and density thresholds, refer to `reference.md`.
 
-### 10.1 Lexical markers
+### 11.1 Lexical markers
 Flag high-risk verbs, adjectives, sentence openers, and template sentences listed in the reference file. Apply density thresholds, not mechanical word-matching.
 
-### 10.2 Syntax-level markers
+### 11.2 Syntax-level markers
 
 **Em dashes:** treat as high-risk. Replace with commas, semicolons, or sentence breaks.
 
 **Contrast templates:** `not A but B`, `not only A but also B`, `rather than`. Keep at most one per paragraph.
 
-**Meta-writing overload:** flag repeated `This paper`, `This analysis`, `These findings`, `The implication is`. Apply the "This paper" rule in section 4.
+**Meta-writing overload:** flag repeated `This paper`, `This analysis`, `These findings`, `The implication is`. Apply the "This paper" rule in section 5.
 
 **Abstract-noun stacking:** flag sentences with more than one abstract core noun without a concrete variable or comparison.
 
@@ -217,7 +223,7 @@ Flag high-risk verbs, adjectives, sentence openers, and template sentences liste
 
 **Gold-plated closings:** flag paragraph endings that sound like slogans. Not every paragraph needs a maximally polished closing line.
 
-### 10.3 Economics-specific risks
+### 11.3 Economics-specific risks
 
 **Causal overreach:** flag `cause`, `drive`, `shape`, `determine` when the design does not support that level of causal language.
 
@@ -237,34 +243,34 @@ Flag high-risk verbs, adjectives, sentence openers, and template sentences liste
 
 ---
 
-## 11. Structure-Level Checks
+## 12. Structure-Level Checks
 
-### 11.1 Paragraphs that all sound the same
+### 12.1 Paragraphs that all sound the same
 Flag sections where every paragraph has the same rhythm and shape.
 
-### 11.2 Results as figure narration
+### 12.2 Results as figure narration
 Flag Results paragraphs that merely read off the figure without explaining why the pattern matters.
 
-### 11.3 Discussion as second abstract
+### 12.3 Discussion as second abstract
 Only the first paragraph of a Discussion may mainly summarize. Later paragraphs must add mechanism, contribution, limitation, or implication.
 
-### 11.4 Methods as tutorial
+### 12.4 Methods as tutorial
 Methods should be reproducible, not pedagogical.
 
 ---
 
-## 12. Figure and Caption Checks
+## 13. Figure and Caption Checks
 
-### 12.1 Figure quality
+### 13.1 Figure quality
 Check: answers one empirical question, sufficient information density, no dashboard aesthetics, consistent color mapping, no label/legend overlap, consistent panel labels, readable fonts.
 
-### 12.2 Caption discipline
+### 13.2 Caption discipline
 Should state: what is plotted, sample rule, statistic used, error bar definition.
 Should not: restate the conclusion, argue policy implications, read like slide notes.
 
 ---
 
-## 13. Sentence-Level Scoring
+## 14. Sentence-Level Scoring
 
 | Score | Meaning | Action |
 |---|---|---|
@@ -277,7 +283,7 @@ Prioritize scores 2 and 3.
 
 ---
 
-## 14. Output Format
+## 15. Output Format
 
 ### For each flagged sentence, provide:
 1. Why it sounds AI-like (which rules triggered)
@@ -325,7 +331,7 @@ Do not default to the shortest possible rewrite. The rewrite should read like po
 
 ---
 
-## 15. Forbidden Output
+## 16. Forbidden Output
 
 Never:
 - rewrite into a different kind of AI prose
@@ -340,4 +346,4 @@ Always:
 - identify the rule
 - explain why it is risky
 - provide a journal-quality revision that preserves mechanism and analytical content
-- check your own revision against the memo-style downgrade rules in section 7
+- check your own revision against the memo-style downgrade rules in section 8
