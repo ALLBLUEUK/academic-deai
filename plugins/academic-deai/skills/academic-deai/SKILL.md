@@ -536,9 +536,10 @@ Never:
 - say only “make it more natural”
 - replace one inflated AI phrase with another inflated AI phrase
 - produce longer replacement sentences than the originals unless necessary
+- fabricate numbers, coefficients, percentages, or any data not present in the original text
 
 Always:
 - quote the original sentence
 - identify the rule
 - explain why it is risky
-- propose the smallest effective fix
+- propose the smallest effective fix: what to delete, what word to swap, how to split the sentence. Do not write a full replacement sentence with invented data.
