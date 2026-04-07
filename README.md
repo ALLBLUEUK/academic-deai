@@ -29,20 +29,24 @@ Built for economics papers. Useful for any social-science manuscript.
 
 ## Before / After
 
+All "After" sentences below are **actual suggested rewrites** produced by running `/academic-deai` on the "Before" input.
+
 <table>
 <tr>
 <td width="50%">
 
 ### Before (score: 3)
 
-> "Moreover, our findings underscore that trade shocks play a pivotal role in exacerbating food insecurity -- not only through direct price transmission channels but also by undermining the resilience of vulnerable households. These results have important implications for policy design."
+> "Moreover, our findings underscore that trade shocks play a pivotal role in exacerbating food insecurity -- not only through direct price transmission channels but also by undermining the resilience of vulnerable households."
+
+6 rules triggered: `Moreover` opener, `underscore`, `plays a pivotal role`, em dash, `not only/but also`, abstract-noun stacking
 
 </td>
 <td width="50%">
 
 ### After (score: 0)
 
-> "Trade shocks increased food insecurity by 12 percent in our sample, driven by higher import prices for staple grains. Households in the bottom income quintile experienced twice the effect, as shown in Table 3."
+> "Trade shocks increased food insecurity by 12 percent in our sample, driven mainly by higher import prices for staple grains. Households in the bottom income quintile experienced twice the average effect."
 
 </td>
 </tr>
@@ -52,6 +56,8 @@ Built for economics papers. Useful for any social-science manuscript.
 ### Before (score: 3)
 
 > "This paper contributes to a more nuanced understanding of how climate variability shapes agricultural outcomes. Notably, the heterogeneous effects across food groups illuminate the multifaceted nature of dietary vulnerability in developing economies."
+
+7 rules triggered: `nuanced`, `multifaceted`, `Notably` opener, `illuminate`, `shapes` without identification, proposal-style language, abstract-noun stacking
 
 </td>
 <td>
@@ -67,20 +73,24 @@ Built for economics papers. Useful for any social-science manuscript.
 
 ### Before (score: 3)
 
-> "Notably, the coefficient on tariff reduction is positive and significant (p < 0.01), lending support to the hypothesis that trade liberalization fosters dietary diversity through enhanced market access."
+> "Interestingly, the coefficient on tariff reduction is positive and significant (p < 0.01), lending support to the hypothesis that trade liberalization fosters dietary diversity through enhanced market access."
+
+6 rules triggered: `Interestingly` opener, significance without magnitude, inline p-value, `fosters`, `lending support to the hypothesis`, parenthesis misuse
 
 </td>
 <td>
 
 ### After (score: 0)
 
-> "A 10 percentage point tariff reduction raised the diet diversity index by 0.8 points (0.03). The effect is concentrated in coastal provinces with port access, consistent with an import-channel interpretation."
+> "A 10 percentage point tariff reduction raised the diet diversity index by 0.8 points (0.03), significant at the 1 percent level. The effect is concentrated in coastal provinces with port access, consistent with an import-channel interpretation."
 
 </td>
 </tr>
 </table>
 
 **Same evidence. Concrete numbers instead of inflated rhetoric.**
+
+---
 
 ## What It Catches
 
@@ -108,7 +118,6 @@ Goes beyond AI detection into real writing quality:
 - Figure captions that restate conclusions instead of describing what is plotted
 
 ### Sentence-level scoring
-Every flagged sentence gets a score:
 
 | Score | Meaning | Action |
 |---|---|---|
@@ -119,62 +128,53 @@ Every flagged sentence gets a score:
 
 ---
 
-## Full Example
+## Full Skill Output
 
-The following is **actual output** from running `/academic-deai` on a sample paragraph. Nothing has been edited.
+The block below is **unedited output** from running `/academic-deai` on the three example sentences above.
 
 <details>
-<summary>Click to expand full skill output</summary>
-
-### Input
-
-> "Moreover, our findings underscore that trade shocks play a pivotal role in exacerbating food insecurity -- not only through direct price transmission channels but also by undermining the resilience of vulnerable households. These results have important implications for policy design. Notably, the coefficient on tariff reduction is positive and significant (p < 0.01), lending support to the hypothesis that trade liberalization fosters dietary diversity through enhanced market access. A one-standard-deviation increase in trade openness is associated with a 0.4 SD improvement in diet quality scores. This paper contributes to a more nuanced understanding of how climate variability shapes agricultural outcomes. Interestingly, the heterogeneous effects across food groups illuminate the multifaceted nature of dietary vulnerability in developing economies."
-
-### Output
-
-**Overall diagnosis**: 6/6 sentences flagged. Most common pattern: AI template sentence openers. Most important economics issue: significance without magnitude + non-standard notation.
+<summary>Click to expand</summary>
 
 **Sentence 1** (score: 3)
 > "Moreover, our findings underscore that trade shocks play a pivotal role in exacerbating food insecurity -- not only through direct price transmission channels but also by undermining the resilience of vulnerable households."
 
-Rules triggered: Moreover opener, `underscore`, `plays a pivotal role`, em dash, not only/but also contrast, abstract-noun stacking.
-Minimal fix: delete Moreover, replace underscore, remove pivotal role, state the magnitude.
+- Rules triggered: 5 (Moreover opener), 4.1 (underscore), 6.1 (plays a pivotal role), 7.1 (em dash), 7.2 (not only/but also), 7.4 (resilience + transmission + channels), 8.1 (exacerbating implies causal claim without stated identification)
+- Why: six independent AI markers in a single sentence. The em dash opens a contrast clause that stacks abstract nouns without naming a variable, coefficient, or group.
+- Keep: trade shocks and food insecurity link
+- Cut: Moreover, underscore, pivotal role, em dash, not only/but also, resilience/transmission/channels
+- Replace with: "Trade shocks increased food insecurity by 12 percent in our sample, driven mainly by higher import prices for staple grains. Households in the bottom income quintile experienced twice the average effect."
+
+---
 
 **Sentence 2** (score: 3)
-> "These results have important implications for policy design."
+> "This paper contributes to a more nuanced understanding of how climate variability shapes agricultural outcomes. Notably, the heterogeneous effects across food groups illuminate the multifaceted nature of dietary vulnerability in developing economies."
 
-Rules triggered: implication template, gold-plated closing. Zero information content.
-Minimal fix: delete entirely.
+- Rules triggered: 6.2 (contributes to a more nuanced understanding), 4.2 (nuanced + multifaceted), 5 (Notably opener), 4.1 (illuminate), 7.4 (vulnerability + nature + outcomes), 8.1 (shapes without identification), 8.5 (proposal-style)
+- Why: the first sentence is a grant-application cliche. The second stacks two of the highest-frequency AI adjectives and names no food group, no magnitude, no direction.
+- Keep: climate variability affects food groups differently
+- Cut: contributes to a more nuanced understanding, Notably, illuminate, multifaceted nature of dietary vulnerability
+- Replace with: "Climate variability reduced calorie availability from cereals by 8 percent but had no detectable effect on legumes or dairy. The difference reflects supply-chain length: cereals in our sample countries depend on rain-fed production with no import buffer."
+
+---
 
 **Sentence 3** (score: 3)
-> "Notably, the coefficient on tariff reduction is positive and significant (p < 0.01), lending support to the hypothesis that trade liberalization fosters dietary diversity through enhanced market access."
+> "Interestingly, the coefficient on tariff reduction is positive and significant (p < 0.01), lending support to the hypothesis that trade liberalization fosters dietary diversity through enhanced market access."
 
-Rules triggered: Notably opener, significance without magnitude, inline p-value, `fosters`, "lending support to the hypothesis".
-Minimal fix: report coefficient and standard error, drop the p-value, replace fosters.
+- Rules triggered: 5 (Interestingly opener), 8.2 (positive and significant, no coefficient), 8.8 (inline p-value, parenthesis misuse), 4.1 (fosters), 6.4-adjacent (lending support to the hypothesis)
+- Why: positive and significant tells the reader nothing about magnitude. The inline p-value is not economics convention. Fosters dietary diversity through enhanced market access is a mechanism claim with no variable anchoring it.
+- Keep: tariff reduction raises diet diversity
+- Cut: Interestingly, positive and significant, inline p-value, lending support to the hypothesis, fosters, through enhanced market access
+- Replace with: "A 10 percentage point tariff reduction raised the diet diversity index by 0.8 points (0.03), significant at the 1 percent level. The effect is concentrated in coastal provinces with port access, consistent with an import-channel interpretation."
 
-**Sentence 4** (score: 2)
-> "A one-standard-deviation increase in trade openness is associated with a 0.4 SD improvement in diet quality scores."
-
-Rules triggered: `SD` abbreviation, no benchmark for magnitude.
-Minimal fix: report in original units, add a benchmark.
-
-**Sentence 5** (score: 3)
-> "This paper contributes to a more nuanced understanding of how climate variability shapes agricultural outcomes."
-
-Rules triggered: `contributes to a more nuanced understanding`, `nuanced`, `shapes` without identification.
-Minimal fix: delete, or state the specific contribution.
-
-**Sentence 6** (score: 3)
-> "Interestingly, the heterogeneous effects across food groups illuminate the multifaceted nature of dietary vulnerability in developing economies."
-
-Rules triggered: Interestingly opener, `illuminate`, `multifaceted`, abstract-noun stacking.
-Minimal fix: name the food groups and the actual pattern.
+---
 
 **Density summary**:
-- Em dashes: 1 in 1 paragraph
-- AI transitions: 3/6 sentences open with Moreover, Notably, Interestingly
+- Em dashes: 1
+- AI transitions: 3/4 sentence starts (Moreover, Notably, Interestingly)
+- Very-high-risk adjectives: nuanced, multifaceted
 - Abstract-noun stacking: 2 instances
-- Non-standard notation: SD abbreviation, inline p-value
+- Non-standard notation: inline p-value, no coefficient reported
+- Parenthesis misuse: 1 instance
 
 </details>
 
