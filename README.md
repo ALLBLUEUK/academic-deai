@@ -23,7 +23,7 @@
 
 ---
 
-A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and [Codex](https://openai.com/index/codex/) skill that detects AI-like phrasing, templated rhetoric, and economics-specific writing problems in academic manuscripts. It scores every sentence, flags the worst offenders, and tells you exactly what to delete, swap, or split.
+A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and [Codex](https://openai.com/index/codex/) skill that evaluates economics manuscripts on two axes: **AI contamination** and **journal quality** (benchmarked against AER, QJE, Econometrica, JPE, REStud conventions). It scores every sentence, flags the worst offenders, and tells you exactly what to delete, swap, or split.
 
 Built for economics papers. Useful for any social-science manuscript.
 
@@ -33,14 +33,14 @@ Built for economics papers. Useful for any social-science manuscript.
 <tr>
 <td width="50%">
 
-### Before (score: 3)
+### Before (AI: 3, JQ: 2)
 
 > "Moreover, our findings underscore that trade shocks play a pivotal role in exacerbating food insecurity -- not only through direct price transmission channels but also by undermining the resilience of vulnerable households. These results have important implications for policy design."
 
 </td>
 <td width="50%">
 
-### After (score: 0)
+### After (AI: 0, JQ: 0)
 
 > "Trade shocks worsened food insecurity through higher prices for imported staples and by reducing the purchasing power of low-income households."
 
@@ -49,14 +49,14 @@ Built for economics papers. Useful for any social-science manuscript.
 <tr>
 <td>
 
-### Before (score: 3)
+### Before (AI: 3, JQ: 2)
 
 > "This paper contributes to a more nuanced understanding of how climate variability shapes agricultural outcomes. Notably, the heterogeneous effects across food groups illuminate the multifaceted nature of dietary vulnerability in developing economies."
 
 </td>
 <td>
 
-### After (score: 0)
+### After (AI: 0, JQ: 0)
 
 > "Climate variability affects agricultural outcomes unevenly across food groups: cereals and perishable crops show larger declines than legumes or dairy in our sample of developing economies."
 
@@ -65,14 +65,14 @@ Built for economics papers. Useful for any social-science manuscript.
 <tr>
 <td>
 
-### Before (score: 3)
+### Before (AI: 3, JQ: 2)
 
 > "Interestingly, the coefficient on tariff reduction is positive and significant, lending support to the hypothesis that trade liberalization fosters dietary diversity through enhanced market access."
 
 </td>
 <td>
 
-### After (score: 0)
+### After (AI: 0, JQ: 0)
 
 > "Tariff reductions are associated with higher dietary diversity, consistent with greater access to imported food varieties in the treated regions."
 
@@ -80,11 +80,22 @@ Built for economics papers. Useful for any social-science manuscript.
 </tr>
 </table>
 
-**AI traces removed. Journal quality preserved.**
+**AI traces removed. Journal quality achieved.**
 
 ---
 
 ## What It Catches
+
+### Two-axis evaluation
+
+Every sentence is scored on two independent axes:
+
+| Axis | What it measures | Scale |
+|---|---|---|
+| **AI score** | Templated rhetoric, inflated phrasing, mechanical balance | 0-3 |
+| **JQ score** | Adherence to top-5 economics journal conventions | 0-3 |
+
+A sentence needs revision if **either** score >= 2. A sentence can be low on AI markers and still fail journal quality (too flat, too memo-like, missing table references).
 
 ### AI lexical markers
 Flags verbs like `underscore`, `foster`, `leverage`, `illuminate`, `dovetail`, `undergird` and adjectives like `nuanced`, `multifaceted`, `overarching`, `pivotal` that are high-frequency AI fingerprints.
@@ -95,8 +106,16 @@ Detects canned patterns: `plays a crucial role`, `has important implications for
 ### Density, not just occurrence
 A single `Moreover` is fine. Three in one section is a pattern. The skill uses per-paragraph and per-1000-word thresholds to avoid false positives.
 
+### Journal-quality checks (top-5 standard)
+Evaluates against published conventions of AER, QJE, Econometrica, JPE, REStud:
+- **Prose register**: first-person plural "we", active voice, 15-25 word sentences, calibrated hedging
+- **Results reporting**: must include table/column references, coefficient + standard error, magnitude interpretation
+- **Section structure**: canonical introduction formula (hook, question, results preview, mechanism, contribution, roadmap)
+- **Contribution framing**: enumerated, anchored to specific prior papers, specific about nature
+- **Formatting**: standard errors in parentheses, leading zeros, "percent" vs "percentage points"
+- **Sentence variety**: flags uniform sentence/paragraph length as both AI marker and quality failure
+
 ### Economics-specific problems
-Goes beyond AI detection into real writing quality:
 - **Causal overreach**: `cause`, `drive`, `shape` without identification strategy
 - **Significance without magnitude**: "positive and significant" with no coefficient or unit
 - **Missing comparison baseline**: "higher" / "increased" without saying relative to what
@@ -109,57 +128,48 @@ Goes beyond AI detection into real writing quality:
 - Discussion sections that re-summarize instead of adding interpretation
 - Figure captions that restate conclusions instead of describing what is plotted
 
-### Sentence-level scoring
-
-| Score | Meaning | Action |
-|---|---|---|
-| 0 | natural | no change |
-| 1 | mildly templated | optional |
-| 2 | suspicious | revise |
-| 3 | strongly AI-like | revise now |
-
 ---
 
 ## Full Skill Output
 
-The block below is **unedited output** from running `/academic-deai` on the three Before sentences.
+The block below is **unedited output** from running `/academic-deai` on the three Before sentences using the current version of the skill (dual-axis scoring with top-5 journal standards).
 
 <details>
 <summary>Click to expand</summary>
 
-**Sentence 1** (score: 3)
-> "Moreover, our findings underscore that trade shocks play a pivotal role in exacerbating food insecurity -- not only through direct price transmission channels but also by undermining the resilience of vulnerable households."
+**Sentence 1** (AI: 3, JQ: 2)
+> "Moreover, our findings underscore that trade shocks play a pivotal role in exacerbating food insecurity -- not only through direct price transmission channels but also by undermining the resilience of vulnerable households. These results have important implications for policy design."
 
-- Rules triggered: 5 (Moreover opener), 4.1 (underscore), 6.1 (plays a pivotal role), 7.1 (em dash), 7.2 (not only/but also), 7.4 (resilience + transmission + channels), 8.1 (exacerbating implies causal claim without stated identification)
-- Why: six independent AI markers in a single sentence. The em dash opens a contrast clause that stacks abstract nouns without naming a variable, coefficient, or group.
-- Minimal fix: delete Moreover; replace `underscore` with show; delete `play a pivotal role in`; remove the dash and contrast template; split into two sentences; state the magnitude from your results.
+- Rules triggered: `Moreover` opener (ai-detection §3), `underscore` (ai-detection §1), `play a pivotal role` template (ai-detection §4 + §2), em dash (ai-detection §5.1), `not only/but also` contrast template (ai-detection §5.2), abstract-noun stacking: `resilience` + `transmission` + `channels` (ai-detection §5.4), implication template verbatim match (ai-detection §4), `exacerbating` causal overreach (ai-detection §6.1)
+- JQ issues: mechanism claimed but no variable/coefficient/group named (journal-quality §2.2), no table reference (journal-quality §2.1), "vulnerable households" is vague (journal-quality §8)
+- Journal-quality revision: "Trade shocks worsened food insecurity through higher prices for imported staples and by reducing the purchasing power of low-income households."
 
 ---
 
-**Sentence 2** (score: 3)
+**Sentence 2** (AI: 3, JQ: 2)
 > "This paper contributes to a more nuanced understanding of how climate variability shapes agricultural outcomes. Notably, the heterogeneous effects across food groups illuminate the multifaceted nature of dietary vulnerability in developing economies."
 
-- Rules triggered: 6.2 (contributes to a more nuanced understanding), 4.2 (nuanced + multifaceted), 5 (Notably opener), 4.1 (illuminate), 7.4 (vulnerability + nature + outcomes), 8.1 (shapes without identification), 8.5 (proposal-style)
-- Why: the first sentence is a grant-application cliche. The second stacks two of the highest-frequency AI adjectives and names no food group, no magnitude, no direction.
-- Minimal fix: delete the first sentence; delete Notably; replace `illuminate` with show; delete `multifaceted nature of dietary vulnerability`; name which food groups and what the actual effect sizes are.
+- Rules triggered: "contributes to a more nuanced understanding" literature template (ai-detection §4), `nuanced` + `multifaceted` very-high-risk adjectives (ai-detection §2), `Notably` opener (ai-detection §3), `illuminate` (ai-detection §1), `shapes` causal overreach (ai-detection §6.1), abstract-noun stacking: `vulnerability` + `nature` + `outcomes` (ai-detection §5.4), proposal-style language (ai-detection §6.5)
+- JQ issues: no food group named, no magnitude, no direction (journal-quality §2.2), contribution not specific — names no method, data, or prior paper (journal-quality §5.2)
+- Journal-quality revision: "Climate variability affects agricultural outcomes unevenly across food groups: cereals and perishable crops show larger declines than legumes or dairy in our sample of developing economies."
 
 ---
 
-**Sentence 3** (score: 3)
-> "Interestingly, the coefficient on tariff reduction is positive and significant (p < 0.01), lending support to the hypothesis that trade liberalization fosters dietary diversity through enhanced market access."
+**Sentence 3** (AI: 3, JQ: 2)
+> "Interestingly, the coefficient on tariff reduction is positive and significant, lending support to the hypothesis that trade liberalization fosters dietary diversity through enhanced market access."
 
-- Rules triggered: 5 (Interestingly opener), 8.2 (positive and significant, no coefficient), 8.8 (inline p-value, parenthesis misuse), 4.1 (fosters), 6.4-adjacent (lending support to the hypothesis)
-- Why: positive and significant tells the reader nothing about magnitude. The inline p-value is not economics convention. Fosters dietary diversity through enhanced market access is a mechanism claim with no variable anchoring it.
-- Minimal fix: delete Interestingly; report coefficient + standard error instead of "positive and significant"; drop the inline p-value; replace `fosters` with a direct verb; delete the hedge phrase.
+- Rules triggered: `Interestingly` opener (ai-detection §3), "positive and significant" without coefficient (ai-detection §6.2), `lending support to the hypothesis` over-hedged template (ai-detection §4), `fosters` high-risk verb (ai-detection §1), unanchored mechanism: "enhanced market access" names no variable (ai-detection §6.4)
+- JQ issues: no coefficient or standard error (journal-quality §2.1), no table/column reference (journal-quality §2.2), "positive and significant" is top red flag in economics results reporting (journal-quality §9)
+- Journal-quality revision: "Tariff reductions are associated with higher dietary diversity, consistent with greater access to imported food varieties in the treated regions."
 
 ---
 
-**Density summary**:
+**Density summary:**
 - Em dashes: 1
 - AI transitions: 3/3 sentences open with Moreover, Notably, Interestingly
 - Very-high-risk adjectives: nuanced, multifaceted
 - Abstract-noun stacking: 2 instances
-- Non-standard notation: inline p-value, no coefficient reported
+- Non-standard notation: no coefficient reported in sentence 3
 
 </details>
 
