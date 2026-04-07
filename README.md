@@ -173,6 +173,8 @@ The block below is **unedited output** from running `/academic-deai` on the thre
 npx skills add ALLBLUEUK/academic-deai
 ```
 
+This installs to Claude Code, Codex, Cursor, and other supported agents automatically.
+
 Or with Claude Code plugin system:
 
 ```bash
@@ -183,9 +185,9 @@ claude plugin install academic-deai@academic-deai
 ### Update
 
 ```bash
-npx skills update
-# or
-claude plugin update academic-deai
+# reinstall to get the latest version
+npx skills remove academic-deai -g
+npx skills add ALLBLUEUK/academic-deai -g -y
 ```
 
 ## Usage
