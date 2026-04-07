@@ -35,7 +35,7 @@ Built for economics papers. Useful for any social-science manuscript.
 
 ### Before (score: 3)
 
-> "Moreover, our findings underscore that trade shocks play a pivotal role in exacerbating food insecurity -- not only through direct price transmission channels but also by undermining the resilience of vulnerable households."
+> "Moreover, our findings underscore that trade shocks play a pivotal role in exacerbating food insecurity -- not only through direct price transmission channels but also by undermining the resilience of vulnerable households. These results have important implications for policy design."
 
 </td>
 <td width="50%">
@@ -51,7 +51,7 @@ Built for economics papers. Useful for any social-science manuscript.
 
 ### Before (score: 3)
 
-> "This paper contributes to a more nuanced understanding of how climate variability shapes agricultural outcomes."
+> "This paper contributes to a more nuanced understanding of how climate variability shapes agricultural outcomes. Notably, the heterogeneous effects across food groups illuminate the multifaceted nature of dietary vulnerability in developing economies."
 
 </td>
 <td>
