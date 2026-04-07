@@ -5,447 +5,266 @@ description: "Detect AI-like phrasing, templated rhetoric, and economics-specifi
 
 # Academic De-AI for Economics Writing
 
-## Purpose
-The goal is not to eliminate all polish. The goal is to remove templated smoothness, inflated abstraction, over-complete explanation, and report-style prose so the manuscript reads like a human-written economics paper.
+**Core mission: remove AI traces without destroying journal-quality economics prose.**
 
-Prioritize:
-- causal discipline
-- concrete comparison baselines
-- mechanism claims tied to variables or model objects
-- journal-style prose over proposal-style prose
-
-When the user provides a file path, read the file first and review the actual text before commenting.
+When the user provides a file path, read the file first. For word lists, template lists, and density thresholds, read the reference file `academic-deai-reference.md` in the same directory as this file.
 
 ---
 
-## 1. Core Rule
+## 1. Journal-Quality Guardrail
 
-Eliminate writing that is:
-- too smooth
-- too complete
-- too self-explanatory
-- too rhetorically balanced
-- too abstract relative to the evidence
+The goal is not to strip prose down to bare statements. The goal is to remove AI-like phrasing while preserving journal-quality economics writing.
 
-The target style is:
-- precise
-- concrete
-- restrained
-- economical
-- field-journal readable
+Good revisions should remain:
+- analytically informative
+- readable
+- moderately abstract when needed
+- suitable for a journal article, not a memo, referee report, or slide deck
+
+Do not flatten a sentence merely to make it shorter.
+Do not replace a polished academic sentence with a blunt note-style sentence unless the original is severely inflated.
+Preserve legitimate interpretation, mechanism, and argumentative structure.
 
 ---
 
-## 2. Economics-Specific Exemptions
+## 2. Distinguish Three Cases
 
-Do not flag a term only because it sounds formal. Flag it when it is overused, stacked with other abstract terms, or inserted into a templated sentence.
+When reviewing a sentence, distinguish between:
 
-Usually acceptable in economics writing:
-- general equilibrium
-- input-output linkages
-- trade elasticity
-- pass-through
-- counterfactual
-- structural vulnerability
-- distributional consequences
-- spillover effects
-- heterogeneous effects
-- asymmetric responses
-- welfare analysis
-- comparative advantage
-- terms of trade
+**1. AI-like phrasing**
+Templated, over-smoothed, over-complete, rhetorically inflated, or mechanically balanced writing. This should be flagged and revised.
 
-Only flag these when:
-- they appear repeatedly in the same paragraph,
-- they are stacked in one sentence,
-- or they are used without a concrete object, variable, or comparison.
+**2. Acceptable academic abstraction**
+Standard journal prose that uses moderate abstraction, careful interpretation, or contribution framing tied to a concrete object. This should be preserved.
+
+**3. Over-corrected flat prose**
+Writing that removes AI markers by stripping away legitimate academic texture, leaving the sentence sounding like a memo or an internal note. This is a bad revision and should be avoided.
 
 ---
 
-## 3. Density Thresholds
+## 3. Preserve These Academic Features
 
-Judge by density, not by single occurrence.
+Do not automatically remove the following if they are concrete and disciplined:
 
-| Check | Threshold | Risk |
-|---|---:|---|
-| Em dashes or dash-style insertions in a paragraph | >= 1 | High |
-| `not A but B` / `not only A but also B` in a paragraph | >= 2 | High |
-| `This paper` / `This analysis` / `These findings` at sentence start | > 2 per 1,000 words, or repeated paragraph openings | Medium |
-| `Moreover` / `Furthermore` / `Additionally` in a paragraph | >= 2 | High |
-| `nuanced` / `multifaceted` / `overarching` in a manuscript | > 1 each | High |
-| weak hedge words in a paragraph (`broadly`, `relatively`, `somewhat`, `largely`, `in part`) | >= 3 | Medium |
-| contribution clichés (`fills a gap`, `offers insights`, `sheds light`) | >= 2 in a section | High |
+- moderate abstraction tied to a specific object
+- mechanism language tied to variables, institutions, sectors, or model objects
+- restrained interpretation
+- occasional contribution framing
+- occasional passive constructions used for discipline or structure
+- normal economics prose rhythm, including one sentence of interpretation after a result
 
-Use judgment. Thresholds are guides, not substitutes for reading.
-
----
-
-## 4. High-Risk Lexical Markers
-
-### 4.1 Verbs
-
-Prefer concrete verbs over inflated or corporate ones.
-
-| Risky | Why | Prefer |
-|---|---|---|
-| register | anthropomorphic | show, exhibit, report |
-| underscore | AI emphasis verb | show, indicate |
-| illuminate / elucidate | literary | clarify, show |
-| navigate | management metaphor | face, address |
-| leverage | business register | use |
-| foster / bolster / buttress | AI support trio | support, strengthen |
-| catalyze / galvanize / spearhead | metaphor-heavy | drive, lead to |
-| unpack | conversational | examine, decompose |
-| dovetail | templated alignment | is consistent with |
-| engender / precipitate | inflated | cause, lead to |
-| undergird | highly AI-coded | underlie, support |
-| garner | unnecessary formality | receive, attract |
-
-### 4.2 Adjectives and adverbs
-
-#### Very high risk
-- nuanced
-- multifaceted
-- overarching
-- burgeoning
-- tapestry
-- landscape
-- nexus
-- myriad
-- plethora
-- realm / arena / sphere
-
-#### Medium risk
-- robust outside a statistical context
-- salient
-- pivotal / paramount / indispensable
-- stark
-- profound / profoundly
-- compelling
-- granular
-- holistic
-- far-reaching
+Examples of acceptable academic prose:
+- "The results suggest that..."
+- "This pattern is consistent with..."
+- "The estimates indicate that..."
+- "A likely mechanism is..."
+- "This paper studies..."
+- "Several limitations should be acknowledged."
 
 ---
 
-## 5. High-Risk Sentence Openers and Transitions
+## 4. "This paper" Rule
 
-### High risk
-- Notably,
-- Importantly,
-- Crucially,
-- Moreover,
-- Furthermore,
-- Additionally,
-- Interestingly,
-- Strikingly,
-- Encouragingly,
-- Reassuringly,
-- Tellingly,
-- Counterintuitively,
-- Paradoxically,
-- In light of,
-- Against this backdrop,
-- Taken together, these findings...
+Do not ban "This paper" outright.
 
-### Medium risk
-- Conversely,
-- Nevertheless,
-- Nonetheless,
-- Specifically,
-- In particular,
-- More broadly,
+Acceptable:
+- one or two information-rich uses in the introduction
+- occasional use in contribution framing
+- occasional use in discussion when referring to the paper's specific contribution
 
-Flag these when they create a mechanical paragraph rhythm.
+Flag only when:
+- repeated frequently
+- used at the start of many paragraphs
+- followed by generic contribution language
+- used instead of stating a concrete result, mechanism, or object
 
 ---
 
-## 6. High-Risk Template Sentences
+## 5. Passive Voice Rule
 
-### 6.1 Role sentences
-- `X plays a crucial role in Y`
-- `X serves as a ...`
-- `X provides a lens through which ...`
-- `X offers a window into ...`
-- `X speaks to the broader issue of ...`
+Do not flag passive voice mechanically.
 
-### 6.2 Literature-positioning templates
-- `a growing body of literature suggests ...`
-- `the literature remains largely silent on ...`
-- `to the best of our knowledge ...`
-- `fills a gap in the literature`
-- `sheds new light on ...`
-- `contributes to a more nuanced understanding of ...`
+Acceptable passive constructions:
+- "Several limitations should be acknowledged."
+- "The estimates are reported in Table 2."
+- "The sample is restricted to..."
+- "The results should be interpreted as..."
 
-### 6.3 Implication templates
-- `has important implications for policy`
-- `carries significant policy implications`
-- `offers actionable insights`
-- `can inform policy design`
-- `warrants further investigation`
-- `merits attention`
-- `remains an open question`
+Flag passive voice only when it creates:
+- empty meta-writing
+- unnecessary distance from the claim
+- inflated or ceremonial phrasing
 
-### 6.4 Over-hedged templates
-- `may well be ...`
-- `could potentially ...`
-- `appears to suggest ...`
-- `seems to indicate ...`
-- `tends to be associated with ...`
+Higher-risk passive examples:
+- "It is worth noting that..."
+- "It should be emphasized that..."
+- "It can be seen that..."
 
 ---
 
-## 7. Syntax-Level AI Markers
+## 6. Rewriting Standard
 
-### 7.1 Ban em dashes and dash-driven explanation
-Treat em dashes and dash-style insertions as high-risk by default.
+When revising, prefer the smallest revision that removes AI-like phrasing while preserving journal-quality prose.
 
-Replace with:
-- commas
-- parentheses
-- semicolons
-- or sentence breaks
+Priority:
+1. remove inflated or templated wording
+2. remove empty emphasis or empty transitions
+3. keep the mechanism
+4. keep the comparison baseline
+5. keep the sentence suitable for a journal article
 
-### 7.2 Repeated contrast templates
-Too many:
-- `not A but B`
-- `not only A but also B`
-- `rather than`
-
-These often create a templated AI cadence. Keep at most one per paragraph.
-
-### 7.3 Meta-writing overload
-Flag repeated or low-information uses of:
-- `This paper`
-- `This analysis`
-- `These findings`
-- `The implication is`
-- `The results show that`
-
-Single, information-rich uses of `This paper` are acceptable, especially in an introduction or contribution paragraph. Flag them only when:
-- they appear too frequently,
-- they open many paragraphs,
-- or they are followed by generic contribution language rather than a concrete object, finding, or mechanism.
-
-Prefer direct statements when possible.
-
-### 7.4 Abstract-noun stacking
-Flag sentences that pile up terms such as:
-- mechanism
-- framework
-- vulnerability
-- resilience
-- architecture
-- transmission
-- channel
-- outcome
-- dimension
-- implication
-
-If a sentence contains more than one abstract core noun without a concrete variable or comparison, mark it.
-
-### 7.5 Over-complete sentences
-Flag sentences that try to contain:
-- method
-- result
-- explanation
-- implication
-
-in one line.
-
-Split into:
-1. result
-2. anchor number or comparison
-3. interpretation
-
-### 7.6 Number-dump prose
-If the paragraph lists many category-level numbers in sequence, flag it.
-
-Economics journal style should usually be:
-- pattern first
-- 1-2 anchor numbers
-- interpretation
-
-### 7.7 Gold-plated closing sentences
-Flag paragraph endings that sound like policy-report slogans:
-- `therefore requires...`
-- `this demonstrates that...`
-- `the implication is that...`
-
-Not every paragraph needs a maximally polished closing line.
+Do not:
+- turn a discussion sentence into a note-style sentence
+- remove all abstraction
+- remove all interpretation
+- replace journal prose with plain factual fragments unless necessary
 
 ---
 
-## 8. Economics-Specific Writing Risks
+## 7. Avoid Memo-Style Downgrades
 
-These are not always AI markers, but they are common in weak economics drafts and often overlap with AI-generated prose.
+Flag a proposed rewrite if it does any of the following:
+- removes the mechanism entirely
+- removes the comparison baseline
+- replaces academic prose with short blunt statements
+- converts a discussion sentence into a results bullet
+- sounds like a policy memo, referee note, or slide narration
+- strips a sentence of all analytical content in the name of simplicity
 
-### 8.1 Causal overreach
-Flag verbs such as:
-- cause
-- drive
-- lead to
-- explain
-- determine
-- shape
-- account for
-
-when the design does not support that level of causal language.
-
-Ask:
-- Is there an identification strategy?
-- Is there a formal decomposition?
-- Is the model structure sufficient for this claim?
-
-If not, suggest weaker language.
-
-### 8.2 Significance without magnitude
-Flag:
-- positive and significant
-- statistically significant
-- economically meaningful
-- robustly significant
-
-when there is no:
-- coefficient magnitude
-- unit
-- benchmark
-- economic interpretation
-
-### 8.3 Missing comparison baseline
-Flag comparative language when no baseline is stated:
-- increases
-- declines
-- larger
-- smaller
-- more
-- less
-- higher
-- lower
-
-Every comparative claim should identify what it is relative to.
-
-### 8.4 Mechanism without variable anchoring
-Flag mechanism claims that do not mention a concrete object:
-- through several channels
-- reflecting structural factors
-- via multiple mechanisms
-- through market frictions
-
-Mechanism claims should be tied to:
-- a variable
-- a coefficient
-- a policy
-- a model object
-- a group comparison
-
-### 8.5 Proposal-style contribution language
-Flag:
-- fills an important gap
-- offers novel insights
-- provides a useful lens
-- contributes to a richer understanding
-- has broad relevance for
-
-These often sound like grant applications rather than journal prose.
-
-### 8.6 Literature positioning without specifics
-If the text says it is:
-- consistent with the literature
-- in line with prior work
-- related to previous studies
-
-without specifying how, flag it.
-
-### 8.7 Weak-hedge density
-Flag high-density use of:
-- broadly
-- relatively
-- somewhat
-- largely
-- in part
-- to some extent
-
-These are often used by AI to sound cautious without being precise.
-
-### 8.8 Non-standard statistical notation
-
-AI-generated economics prose often uses notation conventions from other fields or from informal writing. Flag and correct the following:
-
-**Abbreviations that do not belong in economics papers:**
-- `SD` or `s.d.` for standard deviation → write "standard deviations" in full, or report in original units
-- `CI` for confidence interval → write "confidence interval" or use bracket notation as per journal style
-- `NS` or `n.s.` for not significant → do not use; state the result directly
-
-**Inline p-values and parenthetical test statistics:**
-- `(p < 0.01)` or `(p = 0.03)` inserted inline → economics papers report significance via stars on coefficients in tables, not inline p-values in prose
-- `(Table 3, col. 2)` as parenthetical mid-sentence → acceptable but check whether it reads like a figure caption rather than prose; often better at sentence end or as a separate reference
-
-**Correct economics conventions:**
-- Report coefficient + standard error in parentheses: "The effect is 0.12 (0.03)"
-- Use stars in tables for significance levels, not inline text
-- Write "significant at the 1% level" if significance must be mentioned in prose, not "p < 0.01"
-- Use original units when possible: "a 10 percentage point tariff reduction increased the diet diversity index by 0.8 points" rather than "by 0.4 SD"
-- When standard-deviation units are necessary, write "standard deviations" in full on first use
-
-**Parenthesis overload:**
-- Flag sentences with two or more parenthetical insertions. This is a common AI pattern that makes prose read like annotated code rather than journal text.
-- Economics papers use parentheses sparingly in running text. Heavy parenthetical style is a marker of AI or report-style writing.
-- Parentheses in economics prose should be reserved almost exclusively for standard errors after coefficients, e.g. "0.12 (0.03)".
-- Table/figure references, explanatory asides, and qualifications should be woven into the sentence or placed at the end, not inserted as parenthetical interruptions.
-- When revising, actively reduce parentheses. If a sentence has any parenthetical that is not a standard error, consider rewriting to eliminate it.
+Bad revision pattern:
+- shorter but flatter
+- cleaner but less scholarly
+- less AI-like but also less publishable
 
 ---
 
-## 9. Structure-Level Checks
+## 8. Before / After Examples
 
-### 9.1 Paragraphs that all sound the same
+### Example 1
+
+**AI-like:**
+"Moreover, our findings underscore that trade shocks play a pivotal role in exacerbating food insecurity -- not only through direct price transmission channels but also by undermining the resilience of vulnerable households."
+
+**Over-corrected flat:**
+"Trade shocks worsened food insecurity. Vulnerable households were most affected."
+
+**Journal-quality:**
+"Trade shocks worsened food insecurity through direct price transmission and by placing greater pressure on households with limited capacity to absorb higher food costs."
+
+Why the third is preferred: removes Moreover, underscore, pivotal role, the dash template, and not-only/but-also; preserves the mechanism; remains suitable for a journal article.
+
+### Example 2
+
+**AI-like:**
+"This paper contributes to a more nuanced understanding of how climate variability shapes agricultural outcomes."
+
+**Over-corrected flat:**
+"Climate variability affected agricultural outcomes."
+
+**Journal-quality:**
+"The results show that climate variability affects agricultural outcomes unevenly across settings and sectors."
+
+Why: removes the contribution cliche; keeps analytical content; preserves journal-level abstraction.
+
+### Example 3
+
+**AI-like:**
+"Interestingly, the coefficient on tariff reduction is positive and significant, lending support to the hypothesis that trade liberalization fosters dietary diversity through enhanced market access."
+
+**Over-corrected flat:**
+"Tariff reductions increased dietary diversity."
+
+**Journal-quality:**
+"Tariff reductions are associated with higher dietary diversity, consistent with improved access to imported foods."
+
+Why: removes Interestingly and lending support; keeps the mechanism; keeps the sentence at journal level rather than memo level.
+
+---
+
+## 9. Tone Calibration
+
+Target style:
+- like a careful economics author writing for a journal
+- not like a grant proposal
+- not like a policy memo
+- not like a referee report
+- not like a generated summary
+
+If forced to choose, prefer journal-quality clarity over blunt simplicity.
+
+---
+
+## 10. Detection Rules
+
+For detailed word lists, template lists, and density thresholds, refer to `academic-deai-reference.md`.
+
+### 10.1 Lexical markers
+Flag high-risk verbs, adjectives, sentence openers, and template sentences listed in the reference file. Apply density thresholds, not mechanical word-matching.
+
+### 10.2 Syntax-level markers
+
+**Em dashes:** treat as high-risk. Replace with commas, semicolons, or sentence breaks.
+
+**Contrast templates:** `not A but B`, `not only A but also B`, `rather than`. Keep at most one per paragraph.
+
+**Meta-writing overload:** flag repeated `This paper`, `This analysis`, `These findings`, `The implication is`. Apply the "This paper" rule in section 4.
+
+**Abstract-noun stacking:** flag sentences with more than one abstract core noun without a concrete variable or comparison.
+
+**Over-complete sentences:** flag sentences that try to contain method + result + explanation + implication in one line. Split into result, anchor number, interpretation.
+
+**Number-dump prose:** flag paragraphs that list many category-level numbers. Prefer pattern-first, then 1-2 anchor numbers, then interpretation.
+
+**Gold-plated closings:** flag paragraph endings that sound like slogans. Not every paragraph needs a maximally polished closing line.
+
+### 10.3 Economics-specific risks
+
+**Causal overreach:** flag `cause`, `drive`, `shape`, `determine` when the design does not support that level of causal language.
+
+**Significance without magnitude:** flag `positive and significant` with no coefficient, unit, or benchmark.
+
+**Missing comparison baseline:** flag comparative language without stating what it is relative to.
+
+**Mechanism without variable anchoring:** flag mechanism claims that name no variable, coefficient, policy, or model object.
+
+**Proposal-style language:** flag `fills an important gap`, `offers novel insights`, `provides a useful lens`.
+
+**Literature positioning without specifics:** flag `consistent with the literature` without specifying which findings.
+
+**Weak-hedge density:** flag high-density `broadly`, `relatively`, `somewhat`, `largely`, `in part`.
+
+**Non-standard notation:** flag inline p-values, SD abbreviation, parenthesis overload. See reference file for details.
+
+---
+
+## 11. Structure-Level Checks
+
+### 11.1 Paragraphs that all sound the same
 Flag sections where every paragraph has the same rhythm and shape.
 
-### 9.2 Results as figure narration
+### 11.2 Results as figure narration
 Flag Results paragraphs that merely read off the figure without explaining why the pattern matters.
 
-### 9.3 Discussion as second abstract
-Only the first paragraph of a Discussion may mainly summarize. Later paragraphs must add:
-- mechanism
-- contribution
-- limitation
-- implication
+### 11.3 Discussion as second abstract
+Only the first paragraph of a Discussion may mainly summarize. Later paragraphs must add mechanism, contribution, limitation, or implication.
 
-### 9.4 Methods as tutorial
-Methods should be reproducible, not pedagogical. Remove lecture-style explanation unless needed for a non-specialist audience.
+### 11.4 Methods as tutorial
+Methods should be reproducible, not pedagogical.
 
 ---
 
-## 10. Figure and Caption Checks
+## 12. Figure and Caption Checks
 
-### 10.1 Figure quality
-Check whether the figure:
-- answers one empirical question
-- has enough information density for a main-text figure
-- avoids dashboard or slide-deck aesthetics
-- uses consistent color mapping across figures
-- has no label or legend overlap
-- has consistent panel-label placement
-- has readable font sizes
+### 12.1 Figure quality
+Check: answers one empirical question, sufficient information density, no dashboard aesthetics, consistent color mapping, no label/legend overlap, consistent panel labels, readable fonts.
 
-### 10.2 Caption discipline
-A good economics-journal caption should tell the reader:
-- what is plotted
-- sample or exclusion rule
-- statistic used
-- confidence interval / error bar definition
-
-A caption should not:
-- restate the full substantive conclusion
-- argue policy implications
-- read like slide notes
+### 12.2 Caption discipline
+Should state: what is plotted, sample rule, statistic used, error bar definition.
+Should not: restate the conclusion, argue policy implications, read like slide notes.
 
 ---
 
-## 11. Sentence-Level Scoring
-
-Score each flagged sentence:
+## 13. Sentence-Level Scoring
 
 | Score | Meaning | Action |
 |---|---|---|
@@ -458,23 +277,16 @@ Prioritize scores 2 and 3.
 
 ---
 
-## 12. Revision Priority Order
+## 14. Output Format
 
-When suggesting edits, follow this order:
-1. remove em dashes
-2. remove repeated or low-information `This paper` / `These findings` sentence starts
-3. reduce contrast templates
-4. reduce abstract-noun density
-5. split over-complete sentences
-6. replace slogan-like closing lines with concrete result statements
-7. add comparison baselines where missing
-8. tone down causal language where identification is weak
+### For each flagged sentence, provide:
+1. Why it sounds AI-like (which rules triggered)
+2. What should be removed or softened
+3. A journal-quality revision that preserves mechanism and analytical content
 
----
+Do not default to the shortest possible rewrite. The rewrite should read like polished economics prose, not like a stripped-down summary.
 
-## 13. Output Format
-
-Always return the review in this structure:
+### Overall structure:
 
 ```markdown
 ## Overall diagnosis
@@ -487,14 +299,14 @@ Always return the review in this structure:
 > "quoted sentence"
 - Rule triggered:
 - Why it sounds templated:
-- Minimal revision move:
+- Journal-quality revision:
 - Score: 2 or 3
 
 ## Medium-risk style issues
 > "quoted sentence"
 - Rule triggered:
 - Why it is risky:
-- Minimal revision move:
+- Journal-quality revision:
 - Score: 1 or 2
 
 ## Economics-specific issues
@@ -504,42 +316,28 @@ Always return the review in this structure:
 - Significance without magnitude:
 - Proposal-style contribution language:
 
-## Figure and caption issues
-- Figure:
-- Problem:
-- Why it looks unpolished:
-- Minimal fix:
-
-## Suggested rewrites
-- Sentence:
-- Keep:
-- Cut:
-- Replace with:
-
 ## Density summary
 - Em dashes:
 - High-risk transitions:
-- `This paper` sentence starts:
 - Abstract-noun stacking:
 - Weak-hedge density:
 ```
 
-Do not praise vaguely. Do not rewrite entire sections unless asked.
-
 ---
 
-## 14. Forbidden Output
+## 15. Forbidden Output
 
 Never:
-- rewrite the whole paragraph into a different kind of AI prose
+- rewrite into a different kind of AI prose
 - give generic praise
-- say only “make it more natural”
-- replace one inflated AI phrase with another inflated AI phrase
-- produce longer replacement sentences than the originals unless necessary
-- fabricate numbers, coefficients, percentages, or any data not present in the original text
+- say only "make it more natural"
+- replace one inflated AI phrase with another
+- fabricate numbers, coefficients, or data not in the original text
+- over-correct into memo prose, bullet-point style, or flat summaries
 
 Always:
 - quote the original sentence
 - identify the rule
 - explain why it is risky
-- propose the smallest effective fix: what to delete, what word to swap, how to split the sentence. Do not write a full replacement sentence with invented data.
+- provide a journal-quality revision that preserves mechanism and analytical content
+- check your own revision against the memo-style downgrade rules in section 7

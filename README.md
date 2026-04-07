@@ -29,60 +29,81 @@ Built for economics papers. Useful for any social-science manuscript.
 
 ## Before / After
 
+The skill distinguishes three cases: **AI-like** (flag and revise), **over-corrected flat** (too stripped, avoid this), and **journal-quality** (the target).
+
 <table>
 <tr>
-<td width="50%">
+<td width="33%">
 
-### Before (score: 3)
+### AI-like (score: 3)
 
 > "Moreover, our findings underscore that trade shocks play a pivotal role in exacerbating food insecurity -- not only through direct price transmission channels but also by undermining the resilience of vulnerable households."
 
 </td>
-<td width="50%">
+<td width="33%">
 
-### After (score: 0)
+### Over-corrected
 
-> "Trade shocks worsened food insecurity, mainly through higher prices passed to consumers. Vulnerable households were most affected."
+> "Trade shocks worsened food insecurity. Vulnerable households were most affected."
+
+</td>
+<td width="33%">
+
+### Journal-quality (score: 0)
+
+> "Trade shocks worsened food insecurity through direct price transmission and by placing greater pressure on households with limited capacity to absorb higher food costs."
 
 </td>
 </tr>
 <tr>
 <td>
 
-### Before (score: 3)
+### AI-like (score: 3)
 
-> "This paper contributes to a more nuanced understanding of how climate variability shapes agricultural outcomes. Notably, the heterogeneous effects across food groups illuminate the multifaceted nature of dietary vulnerability in developing economies."
+> "This paper contributes to a more nuanced understanding of how climate variability shapes agricultural outcomes."
 
 </td>
 <td>
 
-### After (score: 0)
+### Over-corrected
 
-> "Climate variability affected food groups differently in developing economies. Cereals declined while legumes and dairy were largely unaffected."
+> "Climate variability affected agricultural outcomes."
+
+</td>
+<td>
+
+### Journal-quality (score: 0)
+
+> "The results show that climate variability affects agricultural outcomes unevenly across settings and sectors."
 
 </td>
 </tr>
 <tr>
 <td>
 
-### Before (score: 3)
+### AI-like (score: 3)
 
-> "Interestingly, the coefficient on tariff reduction is positive and significant (p < 0.01), lending support to the hypothesis that trade liberalization fosters dietary diversity through enhanced market access."
+> "Interestingly, the coefficient on tariff reduction is positive and significant, lending support to the hypothesis that trade liberalization fosters dietary diversity through enhanced market access."
 
 </td>
 <td>
 
-### After (score: 0)
+### Over-corrected
 
-> "Tariff reductions increased dietary diversity, consistent with an import-access channel. The estimated coefficient is 0.08 (0.03), significant at the 1 percent level."
+> "Tariff reductions increased dietary diversity."
+
+</td>
+<td>
+
+### Journal-quality (score: 0)
+
+> "Tariff reductions are associated with higher dietary diversity, consistent with improved access to imported foods."
 
 </td>
 </tr>
 </table>
 
-**Same information. No inflated rhetoric, no AI fingerprints.**
-
-> The skill produces a detailed diagnosis for each sentence: which rules triggered, why it sounds templated, and the minimal fix. The After examples above show the target writing style. See [full output below](#full-skill-output) for actual skill diagnostics.
+**The middle column is a common mistake. The skill aims for the right column: AI traces removed, journal quality preserved.**
 
 ---
 
