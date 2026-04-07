@@ -368,6 +368,30 @@ Flag high-density use of:
 
 These are often used by AI to sound cautious without being precise.
 
+### 8.8 Non-standard statistical notation
+
+AI-generated economics prose often uses notation conventions from other fields or from informal writing. Flag and correct the following:
+
+**Abbreviations that do not belong in economics papers:**
+- `SD` or `s.d.` for standard deviation → write "standard deviations" in full, or report in original units
+- `CI` for confidence interval → write "confidence interval" or use bracket notation as per journal style
+- `NS` or `n.s.` for not significant → do not use; state the result directly
+
+**Inline p-values and parenthetical test statistics:**
+- `(p < 0.01)` or `(p = 0.03)` inserted inline → economics papers report significance via stars on coefficients in tables, not inline p-values in prose
+- `(Table 3, col. 2)` as parenthetical mid-sentence → acceptable but check whether it reads like a figure caption rather than prose; often better at sentence end or as a separate reference
+
+**Correct economics conventions:**
+- Report coefficient + standard error in parentheses: "The effect is 0.12 (0.03)"
+- Use stars in tables for significance levels, not inline text
+- Write "significant at the 1% level" if significance must be mentioned in prose, not "p < 0.01"
+- Use original units when possible: "a 10 percentage point tariff reduction increased the diet diversity index by 0.8 points" rather than "by 0.4 SD"
+- When standard-deviation units are necessary, write "standard deviations" in full on first use
+
+**Parenthesis overload:**
+- Flag sentences with two or more parenthetical insertions — this is a common AI pattern that makes prose read like annotated code rather than journal text
+- Economics papers use parentheses sparingly in running text; heavy parenthetical style is a marker of AI or report-style writing
+
 ---
 
 ## 9. Structure-Level Checks

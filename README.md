@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <a href="#before--after">Before / After</a> &middot;
+  <a href="#real-output">Real Output</a> &middot;
   <a href="#what-it-catches">What It Catches</a> &middot;
   <a href="#install">Install</a> &middot;
   <a href="#usage">Usage</a>
@@ -25,60 +25,82 @@
 
 A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and [Codex](https://openai.com/index/codex/) skill that detects AI-like phrasing, templated rhetoric, and economics-specific writing problems in academic manuscripts. It scores every sentence, flags the worst offenders, and suggests the smallest fix that removes the AI trace.
 
-## Before / After
+Built for economics papers. Useful for any social-science manuscript.
 
-<table>
-<tr>
-<td width="50%">
+## Real Output
 
-### Before (score: 3)
+The following is **actual output** from running `/academic-deai` on a sample paragraph. Nothing has been edited.
 
-> "Moreover, our findings underscore that trade shocks play a pivotal role in exacerbating food insecurity -- not only through direct price transmission channels but also by undermining the resilience of vulnerable households. These results have important implications for policy design."
+### Input
 
-</td>
-<td width="50%">
+> "Moreover, our findings underscore that trade shocks play a pivotal role in exacerbating food insecurity -- not only through direct price transmission channels but also by undermining the resilience of vulnerable households. These results have important implications for policy design. Notably, the coefficient on tariff reduction is positive and significant (p < 0.01), lending support to the hypothesis that trade liberalization fosters dietary diversity through enhanced market access. A one-standard-deviation increase in trade openness is associated with a 0.4 SD improvement in diet quality scores. This paper contributes to a more nuanced understanding of how climate variability shapes agricultural outcomes. Interestingly, the heterogeneous effects across food groups illuminate the multifaceted nature of dietary vulnerability in developing economies."
 
-### After (score: 0)
+### Output (abbreviated)
 
-> "Trade shocks raised food insecurity in our sample by 12%, mainly through higher import prices for staple grains (Table 3, col. 2). Households in the bottom income quintile saw twice the effect."
+**Overall diagnosis**: 6/6 sentences flagged. Most common pattern: AI template sentence openers. Most important economics issue: significance without magnitude + non-standard notation.
 
-</td>
-</tr>
-<tr>
-<td>
+**Sentence 1** (score: 3)
+> "Moreover, our findings underscore that trade shocks play a pivotal role in exacerbating food insecurity -- not only through direct price transmission channels but also by undermining the resilience of vulnerable households."
 
-### Before (score: 3)
+Rules triggered: Moreover opener, `underscore` (AI verb), `plays a pivotal role` (role template), em dash, not only/but also contrast, abstract-noun stacking (resilience + transmission + channels).
 
-> "This paper contributes to a more nuanced understanding of how climate variability shapes agricultural outcomes. Notably, the heterogeneous effects across food groups illuminate the multifaceted nature of dietary vulnerability in developing economies."
+Minimal fix: delete Moreover, replace underscore, remove pivotal role, state the magnitude:
+> "Trade shocks increased food insecurity by X% in our sample, mainly through higher import prices for staple grains."
 
-</td>
-<td>
+---
 
-### After (score: 0)
+**Sentence 2** (score: 3)
+> "These results have important implications for policy design."
 
-> "Climate variability reduced calorie availability from cereals by 8% but had no detectable effect on legumes or dairy (Figure 2a). The difference reflects supply-chain length: cereals depend on rain-fed production with no import buffer in our sample countries."
+Rules triggered: implication template, gold-plated closing. Zero information content. Which policy? What design change?
 
-</td>
-</tr>
-<tr>
-<td>
+Minimal fix: delete entirely.
 
-### Before (score: 2)
+---
 
-> "Interestingly, the coefficient on tariff reduction is positive and significant, lending support to the hypothesis that trade liberalization fosters dietary diversity through enhanced market access."
+**Sentence 3** (score: 3)
+> "Notably, the coefficient on tariff reduction is positive and significant (p < 0.01), lending support to the hypothesis that trade liberalization fosters dietary diversity through enhanced market access."
 
-</td>
-<td>
+Rules triggered: Notably opener, `positive and significant` without coefficient, inline p-value (not economics convention), `fosters` (AI verb), `lending support to the hypothesis` (AI hedging).
 
-### After (score: 0)
+Minimal fix: report coefficient + standard error, drop the p-value, replace fosters:
+> "A 10 percentage point tariff reduction raised the diet diversity index by 0.8 points (0.03), significant at the 1% level."
 
-> "A 10pp tariff cut increased diet variety scores by 0.4 SD (p < 0.01, Table 4). The effect is concentrated in coastal provinces with port access, consistent with an import-channel mechanism."
+---
 
-</td>
-</tr>
-</table>
+**Sentence 4** (score: 2)
+> "A one-standard-deviation increase in trade openness is associated with a 0.4 SD improvement in diet quality scores."
 
-**Same evidence. Concrete numbers instead of inflated rhetoric.**
+Rules triggered: `SD` abbreviation (economics papers write "standard deviations" or use original units), no benchmark for magnitude.
+
+Minimal fix: report in original index units, add a comparison for scale.
+
+---
+
+**Sentence 5** (score: 3)
+> "This paper contributes to a more nuanced understanding of how climate variability shapes agricultural outcomes."
+
+Rules triggered: `contributes to a more nuanced understanding` (top AI cliche), `nuanced` (AI fingerprint), `shapes` (causal language without identification).
+
+Minimal fix: delete. If a contribution claim is needed, state the specific finding.
+
+---
+
+**Sentence 6** (score: 3)
+> "Interestingly, the heterogeneous effects across food groups illuminate the multifaceted nature of dietary vulnerability in developing economies."
+
+Rules triggered: Interestingly opener, `illuminate` (AI verb), `multifaceted` (AI adjective), abstract-noun stacking without concrete variable.
+
+Minimal fix: name the food groups and the actual pattern:
+> "Effects differ across food groups: cereals show the largest decline (X%), while legumes are unaffected."
+
+---
+
+**Density summary**:
+- Em dashes: 1/1 paragraph
+- AI transitions: 3/6 sentences (Moreover, Notably, Interestingly)
+- Abstract-noun stacking: 2 instances
+- Non-standard notation: SD abbreviation, inline p-value
 
 ## What It Catches
 
@@ -98,11 +120,12 @@ Goes beyond AI detection into real writing quality:
 - **Missing comparison baseline**: "higher" / "increased" without saying relative to what
 - **Unanchored mechanism claims**: "through several channels" with no variable or model object
 - **Proposal-style language**: "fills an important gap", "offers novel insights" (grant application, not journal prose)
+- **Non-standard notation**: inline p-values, SD abbreviation, parenthesis overload
 
 ### Structure and figures
 - Results sections that read off figures without explaining why the pattern matters
 - Discussion sections that re-summarize instead of adding interpretation
-- Figure legends that overlap data, inconsistent color mapping, dashboard aesthetics
+- Figure captions that restate conclusions instead of describing what is plotted
 
 ### Sentence-level scoring
 Every flagged sentence gets a score:
@@ -140,39 +163,6 @@ Then paste your text, or point to a file:
 ```
 /academic-deai
 Review the Results section in draft-v3.tex
-```
-
-### Example output
-
-```
-## Overall diagnosis
-- Most common high-risk pattern: template transitions (Moreover/Furthermore density)
-- Most important economics-writing issue: significance claims without magnitude
-- Flagged sentences: 11 / 34
-
-## High-risk AI markers
-> "Moreover, our findings underscore that trade shocks play a pivotal role
-> in exacerbating food insecurity."
-- Rule triggered: 4.1 (underscore), 6.1 (em dash), 5 (Moreover opener), 6.1 (plays a pivotal role)
-- Why: four independent AI markers in one sentence
-- Minimal fix: cut Moreover, replace underscore with show, delete "play a pivotal role", state the magnitude
-- Score: 3
-
-> "These results have important implications for policy design."
-- Rule triggered: 6.3 (implication template), 7.7 (gold-plated closing)
-- Why: generic policy implication with no specificity
-- Minimal fix: delete entire sentence or replace with a concrete policy-relevant finding
-- Score: 3
-
-## Economics-specific issues
-- Causal overreach: "exacerbating" (line 4) without IV or diff-in-diff
-- Significance without magnitude: "positive and significant" (line 12) -- no coefficient
-- Missing baseline: "higher food insecurity" (line 7) -- higher than what?
-
-## Density summary
-- Em dashes: 3 in 4 paragraphs
-- High-risk transitions: Moreover (2x), Notably (1x), Additionally (1x) = 4/6 paragraphs
-- Abstract-noun stacking: resilience + vulnerability + transmission in same sentence (line 4)
 ```
 
 ## License
