@@ -29,27 +29,18 @@ Built for economics papers. Useful for any social-science manuscript.
 
 ## Before / After
 
-The skill distinguishes three cases: **AI-like** (flag and revise), **over-corrected flat** (too stripped, avoid this), and **journal-quality** (the target).
-
 <table>
 <tr>
-<td width="33%">
+<td width="50%">
 
-### AI-like (score: 3)
+### Before (score: 3)
 
 > "Moreover, our findings underscore that trade shocks play a pivotal role in exacerbating food insecurity -- not only through direct price transmission channels but also by undermining the resilience of vulnerable households."
 
 </td>
-<td width="33%">
+<td width="50%">
 
-### Over-corrected
-
-> "Trade shocks worsened food insecurity. Vulnerable households were most affected."
-
-</td>
-<td width="33%">
-
-### Journal-quality (score: 0)
+### After (score: 0)
 
 > "Trade shocks worsened food insecurity through direct price transmission and by placing greater pressure on households with limited capacity to absorb higher food costs."
 
@@ -58,21 +49,14 @@ The skill distinguishes three cases: **AI-like** (flag and revise), **over-corre
 <tr>
 <td>
 
-### AI-like (score: 3)
+### Before (score: 3)
 
 > "This paper contributes to a more nuanced understanding of how climate variability shapes agricultural outcomes."
 
 </td>
 <td>
 
-### Over-corrected
-
-> "Climate variability affected agricultural outcomes."
-
-</td>
-<td>
-
-### Journal-quality (score: 0)
+### After (score: 0)
 
 > "The results show that climate variability affects agricultural outcomes unevenly across settings and sectors."
 
@@ -81,21 +65,14 @@ The skill distinguishes three cases: **AI-like** (flag and revise), **over-corre
 <tr>
 <td>
 
-### AI-like (score: 3)
+### Before (score: 3)
 
 > "Interestingly, the coefficient on tariff reduction is positive and significant, lending support to the hypothesis that trade liberalization fosters dietary diversity through enhanced market access."
 
 </td>
 <td>
 
-### Over-corrected
-
-> "Tariff reductions increased dietary diversity."
-
-</td>
-<td>
-
-### Journal-quality (score: 0)
+### After (score: 0)
 
 > "Tariff reductions are associated with higher dietary diversity, consistent with improved access to imported foods."
 
@@ -103,7 +80,7 @@ The skill distinguishes three cases: **AI-like** (flag and revise), **over-corre
 </tr>
 </table>
 
-**The middle column is a common mistake. The skill aims for the right column: AI traces removed, journal quality preserved.**
+**AI traces removed. Journal quality preserved.**
 
 ---
 
